@@ -1,5 +1,11 @@
 <?php
+// ... (PHP code remains the same)
 include 'db_connect.php';
+
+// Start the session if it's not already started (essential for $_SESSION)
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
@@ -39,10 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
     }
     $stmt->close();
 }
-
-// Check if the login form should be displayed (e.g., if there's an error or if the login button was clicked)
-// For simplicity on the landing page, we will show the login form as a modal or dedicated section
-// if an error occurred during submission, otherwise it's triggered by a button.
 ?>
 
 <!DOCTYPE html>
@@ -53,11 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
 </head>
 <body class="landing-page-body">
 
-    <!-- Navbar -->
     <header class="navbar">
         <div class="logo">
             <span class="logo-icon">🌈</span>
-            Autism Leaning
+            Autism Learning
         </div>
         <nav class="nav-links">
             <a href="#home">HOME</a>
@@ -67,13 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
         </nav>
         <div class="auth-buttons">
             <a href="register.php" class="btn btn-register">REGISTER</a>
-            <!-- Button to open the login modal/section -->
             <button id="loginButton" class="btn btn-log-in">LOG IN</button>
         </div>
     </header>
 
-    <!-- Main Hero Section -->
-    <main class="hero-section">
+    <section id="home" class="hero-section content-section"> 
         <div class="hero-content">
             <div class="text-container">
                 <h1 class="welcome-text">WELCOME TO</h1>
@@ -84,37 +83,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
                 <a href="#services" class="btn-more-info">MORE INFO</a>
             </div>
 
-            <!-- Decorative Elements (for visual effect, mimicking the image) -->
             <div class="decorative-elements">
-                <!-- Paper plane -->
                 <div class="deco-plane"></div>
-                <!-- Dotted line -->
                 <div class="deco-line"></div>
-                <!-- Pink square -->
                 <div class="deco-square"></div>
-                <!-- Yellow star -->
                 <div class="deco-star"></div>
-                <!-- Magnifying glass -->
                 <div class="deco-magnifier"></div>
-                <!-- Ruler -->
                 <div class="deco-ruler"></div>
-                <!-- Crayon/Pencil 1 -->
                 <div class="deco-crayon-1"></div>
-                <!-- Pencil 2 -->
                 <div class="deco-pencil-2"></div>
-                <!-- Notebook -->
                 <div class="deco-notebook"></div>
-                <!-- Orange circle -->
                 <div class="deco-circle"></div>
-                <!-- Kid's area image placeholder -->
                 <div class="hero-image-placeholder">
-                    <!-- This div serves as the background image container -->
-                </div>
+                    </div>
             </div>
         </div>
-    </main>
+    </section>
+    
+    <section id="about" class="about-section content-section">
+        <h2>About Us 🌟</h2>
+        <p>Learn about our mission, vision, and the dedicated team behind the Autism Learning App.</p>
+        <div style="height: 300px; background-color: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 10px;">
+            <p>Our goal is to create a safe, engaging, and effective learning environment for children on the autism spectrum. We focus on personalized, interactive lessons.</p>
+        </div>
+    </section>
 
-    <!-- Login Modal (Hidden by default) -->
+    <section id="services" class="services-section content-section">
+        <h2>Our Services 📚</h2>
+        <p>Explore the educational programs, interactive games, and support features we offer for learners and parents.</p>
+        <div style="height: 400px; background-color: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 10px;">
+            <h3>Key Offerings:</h3>
+            <ul>
+                <li>Personalized Learning Paths</li>
+                <li>Interactive Sensory Games</li>
+                <li>Parental Progress Tracking</li>
+                <li>Behavioral Support Tools</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section content-section">
+        <h2>Contact Us 📧</h2>
+        <p>Get in touch with our support team or learn more about enrollment.</p>
+        <div style="height: 350px; background-color: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
+            <p>Email: support@autismlearning.com</p>
+            <p>Phone: (123) 456-7890</p>
+            <p>Address: 123 Learning Lane, Education City</p>
+        </div>
+    </section>
+
+
     <div id="loginModal" class="modal-overlay" style="<?php echo $error ? 'display: flex;' : 'display: none;'; ?>">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -145,9 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
             const modal = document.getElementById('loginModal');
             const loginButton = document.getElementById('loginButton');
             const closeBtn = document.querySelector('.close-btn');
-            const registerLink = document.querySelector('.register-link a');
-            const error = document.querySelector('.error-message');
-
+            
             // Show modal when login button is clicked
             if (loginButton) {
                 loginButton.onclick = function() {
