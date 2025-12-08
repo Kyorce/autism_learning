@@ -1,29 +1,26 @@
 <?php
-// ... (PHP code remains the same)
+
 include 'db_connect.php';
 
-// Start the session if it's not already started (essential for $_SESSION)
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if the user is already logged in
+
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
     exit();
 }
 
 $error = '';
-$login_attempted = false; // Flag to check if form was submitted
+$login_attempted = false; 
 
-// Handle Login Submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
     $login_attempted = true;
     $username = $_POST['username'];
     $password = $_POST['password'];
-
-    // Retrieve user data
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
+        $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -31,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
 
-        // Verify password
+       
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['username'] = $row['username'];
@@ -158,34 +155,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
 
 
     <script>
-        // Modal logic for Login
+
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('loginModal');
             const loginButton = document.getElementById('loginButton');
             const closeBtn = document.querySelector('.close-btn');
-            
-            // Show modal when login button is clicked
+          
             if (loginButton) {
                 loginButton.onclick = function() {
                     modal.style.display = 'flex';
                 }
             }
             
-            // Hide modal when close button is clicked
+            
             if (closeBtn) {
                 closeBtn.onclick = function() {
                     modal.style.display = 'none';
                 }
             }
 
-            // Hide modal when clicking outside the modal content
+           
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = 'none';
                 }
             }
 
-            // If an error occurred during login attempt, ensure the modal stays open
+          
             <?php if ($error): ?>
                 modal.style.display = 'flex';
             <?php endif; ?>
