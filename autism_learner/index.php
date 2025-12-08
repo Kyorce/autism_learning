@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
                 <h1 class="welcome-text">WELCOME TO</h1>
                 <h2 class="school-name">Autism Learning</h2>
                 <p class="tagline">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+                Where potential blooms into joyful discovery.
                 </p>
                 <a href="#services" class="btn-more-info">MORE INFO</a>
             </div>
@@ -85,14 +85,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
                 <div class="deco-line"></div>
                 <div class="deco-square"></div>
                 <div class="deco-star"></div>
-                <div class="deco-magnifier"></div>
-                <div class="deco-ruler"></div>
-                <div class="deco-crayon-1"></div>
-                <div class="deco-pencil-2"></div>
+       
                 <div class="deco-notebook"></div>
                 <div class="deco-circle"></div>
-                <div class="hero-image-placeholder">
-                    </div>
+                <div class="hero-image-placeholder"></div>
             </div>
         </div>
     </section>
@@ -123,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
         <h2>Contact Us 📧</h2>
         <p>Get in touch with our support team or learn more about enrollment.</p>
         <div style="height: 350px; background-color: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
-            <p>Email: support@autismlearning.com</p>
+            <p>Email: svcxzw@gmail.com</p>
             <p>Phone: (123) 456-7890</p>
             <p>Address: 123 Learning Lane, Education City</p>
         </div>
